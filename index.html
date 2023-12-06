@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset = “utf - 80”>
+		<title>Starry Background</title>
+
+        <!--GETTING ICONS STYLESHEET-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <!--GETTING FONTS-->
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap" rel="stylesheet">
+
+        <style>
+            body {background: black;}
+
+            .star
+            {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background: rgb(255, 255, 255);
+                box-shadow: 0px 0px 10px white;
+                display: "inline-block";
+                position: absolute;
+            }
+
+            .material-icons
+            {
+                font-size: 28px;
+                color: rgb(230, 230, 230);
+                background: none;
+                opacity: 1;
+                position: absolute;
+                top: 20px;
+                right: 30px;
+                opacity: 1;
+                animation-fill-mode: forwards;
+                transition: right 0.5s, transform 0.8s;
+            }
+
+            .material-icons:hover {cursor: pointer;}
+
+            /*Change the position of the gear icon by 250px*/
+
+            /*The color of the label next to the slider*/
+            .slider-color {color: white;}
+
+
+            /*STYLES FOR SIDE NAV*/
+            /* The side navigation menu */
+            .sidenav
+            {
+                font-family: 'Comfortaa', cursive;
+                height: 100%; /* 100% Full-height */
+                width: 0; /* 0 width - change this with JavaScript */
+                position: fixed; /* Stay in place */
+                z-index: 1; /* Stay on top */
+                top: 0; /* Stay at the top */
+                right: 0;
+                background-color:black; /* Black*/
+                overflow-x: hidden; /* Disable horizontal scroll */
+                padding-top: 60px; /* Place content 60px from the top */
+                transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+            }
+
+            /* The navigation menu links */
+            .sidenav a
+            {
+                padding: 8px 8px 8px 32px;
+                text-decoration: none;
+                font-size: 25px;
+                color: #818181;
+                display: block;
+                transition: 0.3s;
+            }
+
+            /* When you mouse over the navigation links, change their color */
+            .sidenav a:hover
+            {
+                color: #f1f1f1;
+            }
+
+            /* Position and style the close button (top right corner) */
+            .sidenav .closebtn
+            {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+            }
+
+            /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+            @media screen and (max-height: 450px)
+            {
+                .sidenav {padding-top: 15px;}
+                .sidenav a {font-size: 18px;}
+            }
+
+
+            /*STYLES FOR SLIDERS*/
+            .slidecontainer
+            {
+                width: 100%; /* Width of the outside container */
+            }
+
+            /* The slider itself */
+            .slider
+            {
+                -webkit-appearance: none;  /* Override default CSS styles */
+                appearance: none;
+                width: 220px; /* width of the slider */
+                height: 8px; /* Specified height */
+                border-radius: 5px;
+                background: #d3d3d3; /* Grey background */
+                outline: none; /* Remove outline */
+                opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+                -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+                transition: opacity .2s;
+            }
+
+            /* Mouse-over effects */
+            .slider:hover
+            {
+                opacity: 1; /* Fully shown on mouse-over */
+            }
+
+            /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+            .slider::-webkit-slider-thumb
+            {
+                -webkit-appearance: none; /* Override default look */
+                appearance: none;
+                width: 15px; /* Set a specific slider handle width */
+                height: 15px; /* Slider handle height */
+                border-radius: 50%;
+                background: rgb(255, 255, 255); /* Green background */
+                cursor: pointer; /* Cursor on hover */
+            }
+
+            .slider::-moz-range-thumb
+            {
+                width: 15px; /* Set a specific slider handle width */
+                height: 15px; /* Slider handle height */
+                border-radius: 50%;
+                background: rgb(255, 255, 255); /* Green background */
+                cursor: pointer; /* Cursor on hover */
+            }
+        </style>
+    </head>
+    <body>
+        <!--<div class="star"></div>-->
+
+        <!--<button id="get-width" onclick="showWidth()">SHOW</button>-->
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            
+            <label class="slider-color">Red: </label>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="255" value="255" class="slider" id="red-slider">
+            </div><br>
+
+            <label class="slider-color">Green: </label>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="255" value="255" class="slider" id="green-slider">
+            </div><br>
+
+            <label class="slider-color">Blue: </label>
+            <div class="slidecontainer">
+                <input type="range" min="0" max="255" value="255" class="slider" id="blue-slider">
+            </div><br>
+
+        </div>
+          
+        <!-- Use any element to open the sidenav -->
+        <span id="settings-option" class="material-icons" onclick="openNav();animateSettings();">settings</span>
+
+        <!--SCRIPT FOR STARS-->
+        <script>
+            for (var i = 0; i < 250; i++)
+            {
+                var newStar = document.createElement("div");
+                newStar.className = "star";
+                
+                newStar.style.left = (Math.floor(Math.random() * (window.innerWidth-10)) + 1) + "px";
+                newStar.style.top = (Math.floor(Math.random() *  (window.innerHeight-10)) + 1) + "px";
+                document.body.appendChild(newStar);
+            }
+
+            var stars = document.querySelectorAll(".star");
+ 
+            for (var i = 0; i < 250; i++)
+            {
+                var star = stars[i];
+                
+                star.keyframes = [{
+                    opacity: 0
+                }, {
+                    opacity: 1
+                }, {
+                    opacity: 0
+                }];
+                
+                star.animProps = {
+                    duration: 1000 + 500 * i,
+                    easing: "ease-out",
+                    iterations: Infinity
+                }
+                
+                var animationPlayer = star.animate(star.keyframes, star.animProps);
+            }    
+
+        </script>
+
+        <!--SCRIPT FOR SIDE NAVIGATION-->
+        <script>
+        var settingsOption = document.getElementById("settings-option");
+
+        /* Set the width of the side navigation to 250px */
+        function openNav()
+        {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("mySidenav").style.borderLeft = "3px solid silver";
+            settingsOption.style.right = "280px";
+            settingsOption.style.transform = "rotate(-135deg)";
+        }
+
+        /* Set the width of the side navigation to 0 */
+        function closeNav()
+        {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("mySidenav").style.borderLeft = "none";
+            settingsOption.style.right = "30px";
+            settingsOption.style.transform = "rotate(0deg)";
+        }
+
+        </script>
+
+        <!--SCRIPT FOR SLIDERS-->
+        <script>
+            var redSlider = document.getElementById("red-slider");
+            var greenSlider = document.getElementById("green-slider");
+            var blueSlider = document.getElementById("blue-slider");
+
+            var starRed = 255;
+            var starGreen = 255;
+            var starBlue = 255;
+
+            //output.innerHTML = redSlider.value; // Display the default slider value
+
+            // Update the current slider value (each time you drag the slider handle)
+            redSlider.oninput = function()
+            {
+                for (var i = 0; i < stars.length; i++)
+                {
+                    starRed = this.value;
+                    stars[i].style.background = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                    settingsOption.style.color = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                }
+            }
+
+            greenSlider.oninput = function()
+            {
+                for (var i = 0; i < stars.length; i++)
+                {
+                    starGreen = this.value;
+                    stars[i].style.background = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                    settingsOption.style.color = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                }
+            }
+
+            blueSlider.oninput = function()
+            {
+                for (var i = 0; i < stars.length; i++)
+                {
+                    starBlue = this.value;
+                    stars[i].style.background = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                    settingsOption.style.color = "rgb(" + starRed + ", " + starGreen + ", " + starBlue + ")";
+                }
+            }
+
+        </script>
+    </body>
+
+</html>
